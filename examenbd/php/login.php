@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (password_verify($contrasena, $row['contrasena'])) {
             // Contraseña válida, inicio de sesión exitoso
             echo "Inicio de sesión exitoso";
-            header("Location: ../examen.html");
+            header("Location: ../exam.html");
             exit();
         } else {
             echo "Contraseña incorrecta";
@@ -22,6 +22,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "Correo no encontrado";
     }
 }
-
-$conn->close();
-?>
