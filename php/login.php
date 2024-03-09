@@ -1,5 +1,6 @@
 <?php
 include('conexion.php');
+session_start(); // Inicia la sesión al principio del archivo
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $correo = $_POST['correo'];
@@ -12,8 +13,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $row = $result->fetch_assoc();
         if (password_verify($contrasena, $row['contrasena'])) {
             // Contraseña válida, inicio de sesión exitoso
-            echo "Inicio de sesión exitoso";
-            header("Location: ../examen.html");
+            $_SESSION['usuario_id'] = $row['id']; // Almacena el ID del usuario en la sesión
+            $_SESSION['matricula'] = $row['matricula']; // Almacena el nombre del usuario en la sesión
+            $_SESSION['carrera'] = $row['carrera']; // Almacena el apellido del usuario en la sesión
+            $_SESSION['nombre'] = $row['nombre'];
+            $_SESSION['cuatrimestre']= $row['cuatrimestre'];
+            // Puedes agregar más datos según tus necesidades
+
+            header("Location: exam.php");
             exit();
         } else {
             echo "Contraseña incorrecta";
